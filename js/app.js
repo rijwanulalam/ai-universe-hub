@@ -14,7 +14,11 @@ const showData = (tools) => {
   const fewTools = tools.slice(0, 6);
   fewTools.forEach((tools) => {
     console.log(tools);
+    // date formatting
     const date = (tools.published_in);
+    [month, day, year] = date.split('/');
+    const newDate = [day, month, year];
+    const newFormat = (newDate.join("/"))
 
     const postDiv = document.createElement("div");
 
@@ -31,10 +35,10 @@ const showData = (tools) => {
                 <h3 class="text-xl font-bold">${tools.name}</h3>
                 <p class="flex items-center my-3"><span class="material-symbols-outlined mr-2">
                 calendar_month
-                </span>${tools.published_in}</p>
+                </span>${newFormat}</p>
             </div>
             <div>
-                <span onclick="handleModal(${tools.id})" class="material-symbols-outlined text-green-700 cursor-pointer">
+                <span onclick="handleModal('${tools.id}')" class="material-symbols-outlined text-green-700 cursor-pointer">
                 arrow_forward
                 </span>
             </div>
@@ -44,9 +48,15 @@ const showData = (tools) => {
   });
 };
 
-const handleModal = (id) => {
-    console.log(id)
+const handleModal = async(id) => {
+   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
+   const res = await fetch(url);
+   const data = await res.json();
+   showModal(data.data)
 }
 
+const showModal = infos => {
+    console.log(infos)
+}
 
 loadData();
