@@ -14,6 +14,8 @@ const showData = (tools) => {
   const fewTools = tools.slice(0, 6);
   fewTools.forEach((tools) => {
     console.log(tools);
+    const date = (tools.published_in);
+    console.log(date)
     const postDiv = document.createElement("div");
 
     postDiv.classList.add("p-5", "border", "rounded-lg");
