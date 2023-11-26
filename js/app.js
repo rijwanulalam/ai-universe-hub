@@ -15,7 +15,7 @@ const showData = (tools) => {
   fewTools.forEach((tools) => {
     console.log(tools);
     const date = (tools.published_in);
-    console.log(date)
+
     const postDiv = document.createElement("div");
 
     postDiv.classList.add("p-5", "border", "rounded-lg");
@@ -24,7 +24,7 @@ const showData = (tools) => {
         <h3 class="text-xl font-bold my-5 uppercase">Features</h3>
         <li class="list-decimal">${tools.features[0]}</li>
         <li class="list-decimal">${tools.features[1]}</li>
-        <li class="list-decimal">${tools.features[2]}</li>
+        <li class="list-decimal">${tools.features[2] ? tools.features[2] : "Text generation"}</li>
         <hr class="my-5">
         <div class="flex items-center justify-between">
             <div>
@@ -34,15 +34,19 @@ const showData = (tools) => {
                 </span>${tools.published_in}</p>
             </div>
             <div>
-                <span class="material-symbols-outlined text-green-700">
+                <span onclick="handleModal(${tools.id})" class="material-symbols-outlined text-green-700 cursor-pointer">
                 arrow_forward
                 </span>
             </div>
         </div>
     `;
-    
     contentSection.appendChild(postDiv);
   });
 };
+
+const handleModal = (id) => {
+    console.log(id)
+}
+
 
 loadData();
