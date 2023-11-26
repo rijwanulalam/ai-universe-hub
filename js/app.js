@@ -20,19 +20,26 @@ const showData = (tools) => {
     postDiv.innerHTML = `
         <img class="h-72 w-96 rounded-lg" src="${tools?.image}" alt="${tools.name}">
         <h3 class="text-xl font-bold my-5 uppercase">Features</h3>
+        <li class="list-decimal">${tools.features[0]}</li>
+        <li class="list-decimal">${tools.features[1]}</li>
+        <li class="list-decimal">${tools.features[2]}</li>
+        <hr class="my-5">
+        <div class="flex items-center justify-between">
+            <div>
+                <h3 class="text-xl font-bold">${tools.name}</h3>
+                <p class="flex items-center my-3"><span class="material-symbols-outlined mr-2">
+                calendar_month
+                </span>${tools.published_in}</p>
+            </div>
+            <div>
+                <span class="material-symbols-outlined text-green-700">
+                arrow_forward
+                </span>
+            </div>
+        </div>
     `;
-    tools.features.forEach((feature) => {
-      const li = document.createElement("li");
-      li.classList.add("list-decimal");
-      li.innerText = feature ? feature : "no data found";
-      postDiv.appendChild(li);
-    });
+    
     contentSection.appendChild(postDiv);
-
-    const lowerContent = document.getElementById("lower-content");
-    lowerContent.innerHTML = `
-        <h3>${tools.name}</h3>
-    `;
   });
 };
 
