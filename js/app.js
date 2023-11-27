@@ -107,7 +107,7 @@ const showModal = (infos) => {
                 <h3>${plan[0]}</h3>
             </div>
         </div>
-        <div class="grid grid-cols-2 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
                 <h3 class="text-2xl font-medium my-3">Features</h3>
                 <li>${infos.features[1].feature_name}</li>
