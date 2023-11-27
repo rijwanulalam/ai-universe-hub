@@ -57,6 +57,49 @@ const handleModal = async(id) => {
 
 const showModal = infos => {
     console.log(infos)
+    const divModal = document.getElementById("show-modal");
+    divModal.classList.remove("hidden");
+    const gridDiv = document.createElement("div");
+    gridDiv.classList.add("grid", "gap-10", "grid-cols-2", "bg-white", "rounded", "shadow-lg", "p-5", "w-9/12");
+    gridDiv.innerHTML = `
+    <div class="p-10 border-2 border-pink-400 rounded-lg bg-pink-100/50">
+        <h3 class="text-3xl font-bold">${infos.description}</h3>
+        <div class="grid grid-cols-3 my-10 gap-10 text-xl font-medium">
+            <div class="text-center bg-white p-10 rounded-lg text-green-500">
+                <h3>${infos.pricing[0].price}</h3>
+                <h3>${infos.pricing[0].plan}</h3>
+            </div>
+            <div class="text-center bg-white p-10 rounded-lg text-amber-500">
+                <h3>${infos.pricing[1].price}</h3>
+                <h3>${infos.pricing[1].plan}</h3>
+            </div>
+            <div class="text-center bg-white p-10 rounded-lg text-pink-500">
+                <h3>${infos.pricing[2].price}</h3>
+                <h3>${infos.pricing[2].plan}</h3>
+            </div>
+        </div>
+        <div class="grid grid-cols-2 gap-10">
+            <div>
+                <h3 class="text-2xl font-medium my-5">Features</h3>
+                <li>${infos.features[1].feature_name}</li>
+                <li>${infos.features[2].feature_name}</li>
+                <li>${infos.features[3].feature_name}</li>
+            </div>
+            <div>
+                <h3 class="text-2xl font-medium my-5">Integrations</h3>
+                <li>${infos.integrations[0]}</li>
+                <li>${infos.integrations[1]}</li>
+                <li>${infos.integrations[2]}</li>
+            </div>
+        </div>
+    </div>
+    <div class="text-center p-10 border rounded-lg">
+      <img class=" rounded-lg" src="${infos.image_link[0]}" alt="">
+      <h3 class="text-4xl font-bold my-2">${infos.input_output_examples ? infos.input_output_examples[0].input : infos.input_output_examples[1].input}</h3>
+      <p class="text-xl">${infos.input_output_examples ? infos.input_output_examples[0].output : infos.input_output_examples[1].output}</p>
+    </div>
+    `
+    divModal.appendChild(gridDiv);
 }
 
 loadData();
