@@ -13,7 +13,7 @@ const showData = (tools) => {
   const contentSection = document.getElementById("content-container");
   const fewTools = tools.slice(0, 6);
   fewTools.forEach((tools) => {
-    console.log(tools);
+    // console.log(tools);
     // date formatting
     const date = tools.published_in;
     [month, day, year] = date.split("/");
@@ -62,7 +62,7 @@ const handleModal = async (id) => {
 };
 
 const showModal = (infos) => {
-  console.log(infos);
+  // console.log(infos);
   // pricing split
   const contactUs = infos.pricing[2].price.split(" ");
   const plan = infos.pricing[2].plan.split(" ");
@@ -93,29 +93,29 @@ const showModal = (infos) => {
     <div class="md:p-10 border-2 border-pink-400 rounded-lg bg-pink-100/50">
     
         <h3 class="text-3xl font-bold">${infos.description}</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 my-10 gap-10 text-xl font-medium">
-            <div class="text-center bg-white p-10 rounded-lg text-green-500">
+        <div class="grid grid-cols-1 md:grid-cols-3 my-5 gap-10 text-xl font-medium">
+            <div class="text-center bg-white p-5 rounded-lg text-green-500">
                 <h3>${infos.pricing[0].price}</h3>
                 <h3>${infos.pricing[0].plan}</h3>
             </div>
-            <div class="text-center bg-white p-10 rounded-lg text-amber-500">
+            <div class="text-center bg-white p-5 rounded-lg text-amber-500">
                 <h3>${infos.pricing[1].price}</h3>
                 <h3>${infos.pricing[1].plan}</h3>
             </div>
-            <div class="text-center bg-white p-10 rounded-lg text-pink-500">
+            <div class="text-center bg-white p-5 rounded-lg text-pink-500">
                 <h3>${contactUs[0] + " " + contactUs[1]}</h3>
                 <h3>${plan[0]}</h3>
             </div>
         </div>
         <div class="grid grid-cols-2 gap-10">
             <div>
-                <h3 class="text-2xl font-medium my-5">Features</h3>
+                <h3 class="text-2xl font-medium my-3">Features</h3>
                 <li>${infos.features[1].feature_name}</li>
                 <li>${infos.features[2].feature_name}</li>
                 <li>${infos.features[3].feature_name}</li>
             </div>
             <div>
-                <h3 class="text-2xl font-medium my-5">Integrations</h3>
+                <h3 class="text-2xl font-medium my-3">Integrations</h3>
                 <li>${infos.integrations[0]}</li>
                 <li>${infos.integrations[1]}</li>
                 <li>${infos.integrations[2]}</li>
