@@ -65,6 +65,7 @@ const showModal = (infos) => {
   console.log(infos);
   // pricing split
   const contactUs = infos.pricing[2].price.split(" ");
+  const plan = infos.pricing[2].plan.split(" ");
   // console.log(contactUs[0]+ " " + contactUs[1])
 
   const divModal = document.getElementById("show-modal");
@@ -103,7 +104,7 @@ const showModal = (infos) => {
             </div>
             <div class="text-center bg-white p-10 rounded-lg text-pink-500">
                 <h3>${contactUs[0] + " " + contactUs[1]}</h3>
-                <h3>${infos.pricing[2].plan}</h3>
+                <h3>${plan[0]}</h3>
             </div>
         </div>
         <div class="grid grid-cols-2 gap-10">
