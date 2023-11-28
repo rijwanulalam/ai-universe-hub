@@ -1,4 +1,5 @@
 const loadData = async (dataLimit) => {
+  loader(true);
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   try {
     const res = await fetch(url);
@@ -59,10 +60,12 @@ const showData = (tools, dataLimit) => {
         </div>
     `;
     contentSection.appendChild(postDiv);
+    loader(false);
   });
 };
 
 const handleModal = async (id) => {
+  loader(true)
   const url = `https://openapi.programming-hero.com/api/ai/tool/${id}`;
   const res = await fetch(url);
   const data = await res.json();
@@ -150,11 +153,22 @@ const showModal = (infos) => {
     const modal = document.getElementById("show-modal");
     modal.classList.add("hidden");
   })
-  
+  loader(false);
 };
 
 document.getElementById("btn-show-all").addEventListener("click", function(){
+  loader(true);
   loadData();
 })
+
+
+const loader = (isLoading) => {
+  const loaderSection = document.getElementById("loader");
+  if (isLoading) {
+    loaderSection.classList.remove("hidden");
+  } else {
+    loaderSection.classList.add("hidden");
+  }
+};
 
 loadData(6);
