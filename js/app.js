@@ -1,18 +1,19 @@
-const loadData = async () => {
+const loadData = async (dataLimit) => {
   const url = `https://openapi.programming-hero.com/api/ai/tools`;
   try {
     const res = await fetch(url);
     const data = await res.json();
-    showData(data.data.tools);
+    showData(data.data.tools, dataLimit);
   } catch (err) {
     console.log(err);
   }
 };
 
-const showData = (tools) => {
+const showData = (tools, dataLimit) => {
   const contentSection = document.getElementById("content-container");
+  contentSection.innerHTML = "";
   const showAll = document.getElementById("show-all");
-  if(tools.length > 6){
+  if(dataLimit && tools.length > 6){
     tools = tools.slice(0, 6);
     showAll.classList.remove("hidden");
   }
@@ -31,7 +32,7 @@ const showData = (tools) => {
 
     postDiv.classList.add("p-5", "border", "rounded-lg");
     postDiv.innerHTML = `
-        <img class="h-72 w-96 rounded-lg" src="${tool?.image}" alt="${
+        <img class="h-72 w-96 rounded-lg" src="${tool.image ? tool.image : "no picture found"}" alt="${
       tool.name
     }">
         <h3 class="text-xl font-bold my-5 uppercase">Features</h3>
@@ -71,8 +72,8 @@ const handleModal = async (id) => {
 const showModal = (infos) => {
   // console.log(infos);
   // pricing split
-  const contactUs = infos.pricing[2].price.split(" ");
-  const plan = infos.pricing[2].plan.split(" ");
+    const contactUs = infos.pricing[2].price.split(" ") ? infos.pricing[2].price.split(" ") : " ";
+    const plan = infos.pricing[2].plan.split(" ");
   // console.log(contactUs[0]+ " " + contactUs[1])
 
   const divModal = document.getElementById("show-modal");
@@ -110,36 +111,36 @@ const showModal = (infos) => {
                 <h3>${infos.pricing[1].plan}</h3>
             </div>
             <div class="text-center bg-white p-5 rounded-lg text-pink-500">
-                <h3>${contactUs[0] + " " + contactUs[1]}</h3>
+                <h3>${contactUs ? contactUs[0] + " " + contactUs[1] : " "}</h3>
                 <h3>${plan[0]}</h3>
             </div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
             <div>
                 <h3 class="text-2xl font-medium my-3">Features</h3>
-                <li>${infos.features[1].feature_name}</li>
-                <li>${infos.features[2].feature_name}</li>
-                <li>${infos.features[3].feature_name}</li>
+                <li>${infos.features[1].feature_name ? infos.features[1].feature_name : "no data found"}</li>
+                <li>${infos.features[2].feature_name ? infos.features[2].feature_name : "no data found"}</li>
+                <li>${infos.features[3].feature_name ? infos.features[3].feature_name : "no data found"}</li>
             </div>
             <div>
                 <h3 class="text-2xl font-medium my-3">Integrations</h3>
-                <li>${infos.integrations[0]}</li>
-                <li>${infos.integrations[1]}</li>
-                <li>${infos.integrations[2]}</li>
+                <li>${infos.integrations ? infos.integrations[0] : "no data found"}</li>
+                <li>${infos.integrations[1] ? infos.integrations[1] : "no data found"}</li>
+                <li>${infos.integrations[2] ? infos.integrations[2] : "no data found"}</li>
             </div>
         </div>
     </div>
     <div class="text-center p-10 border rounded-lg">
-      <img class=" rounded-lg" src="${infos.image_link[0]}" alt="">
+      <img class=" rounded-lg" src="${infos.image_link[0] ? infos.image_link[0] : "no picture found"}" alt="">
       <h3 class="text-4xl font-bold my-2">${
-        infos.input_output_examples
+        infos.input_output_examples[0].input
           ? infos.input_output_examples[0].input
-          : infos.input_output_examples[1].input
+          : "no data found"
       }</h3>
       <p class="text-xl">${
-        infos.input_output_examples
+        infos.input_output_examples[0].output
           ? infos.input_output_examples[0].output
-          : infos.input_output_examples[1].output
+          : "no data found"
       }</p>
     </div>
     `;
@@ -152,5 +153,8 @@ const showModal = (infos) => {
   
 };
 
+document.getElementById("btn-show-all").addEventListener("click", function(){
+  loadData();
+})
 
-loadData();
+loadData(6);
