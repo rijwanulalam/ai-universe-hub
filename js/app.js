@@ -14,13 +14,13 @@ const loadData = async (dataLimit) => {
 const sortDate = (tools, dataLimit) => {
   const contentSection = document.getElementById("content-container");
   contentSection.innerHTML = "";
-  const showAll = document.getElementById("show-all");
+  // const showAll = document.getElementById("show-all");
   const arr = tools.map((tool) => {
     return { ...tool, published_in: new Date(tool.published_in) };
   });
   // console.log(arr)
   const sortAsc = arr.sort((a, b) => Number(a.published_in) - b.published_in);
-  console.log(sortAsc);
+  // console.log(sortAsc);
   // if (dataLimit && sortAsc.length > 6) {
   //   sortAsc = sortAsc.slice(0, 6);
   //   showAll.classList.remove("hidden");
